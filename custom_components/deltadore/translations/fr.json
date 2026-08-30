@@ -1,0 +1,242 @@
+{
+    "options": {
+        "step": {
+            "init": {
+                "title": "Options Delta Dore Tydom",
+                "description": "Ajustez l'adresse de la passerelle (suit les changements DHCP), le code PIN de l'alarme et les zones d'alarme Tyxal. Les modes absent et vacances arment l'alarme complète (total) ; les listes de zones s'appliquent aux autres modes.",
+                "data": {
+                    "host": "Adresse IP ou nom d'hôte de la passerelle",
+                    "pin": "Code PIN de l'alarme",
+                    "zones_home": "Zones du mode présent (séparées par des virgules, ex. 1,2,4)",
+                    "zones_night": "Zones du mode nuit (séparées par des virgules)",
+                    "zones_custom": "Zones du mode personnalisé (séparées par des virgules)"
+                }
+            }
+        },
+        "error": {
+            "invalid_host": "Adresse IP ou nom d'hôte invalide.",
+            "invalid_pin": "Le code PIN de l'alarme ne doit contenir que des chiffres.",
+            "invalid_zones": "Les zones doivent être des nombres séparés par des virgules (ex. 1,2,4).",
+            "cannot_connect": "Connexion à la passerelle impossible à cette adresse.",
+            "authentication_error": "Échec de l'authentification à cette adresse.",
+            "communication_error": "Erreur de communication ; réessayez."
+        }
+    },
+    "config": {
+        "step": {
+            "user": {
+                "title": "Delta Dore Tydom",
+                "description": "Choisissez comment Home Assistant joint votre passerelle Tydom. Les modes local et cloud récupèrent le mot de passe de la passerelle depuis votre compte Delta Dore ; le mode manuel le demande directement.",
+                "data": {
+                    "config_mode": "Mode de configuration"
+                }
+            },
+            "local": {
+                "title": "Connexion locale",
+                "description": "Connexion directe à la passerelle sur votre réseau ; le mot de passe de la passerelle est récupéré depuis votre compte Delta Dore.",
+                "data": {
+                    "host": "Adresse IP ou nom d'hôte de la passerelle",
+                    "mac": "Adresse MAC (12 caractères, sans séparateurs)",
+                    "email": "E-mail du compte Delta Dore",
+                    "password": "Mot de passe du compte Delta Dore",
+                    "pin": "Code PIN de l'alarme (optionnel)"
+                }
+            },
+            "cloud": {
+                "title": "Connexion cloud",
+                "description": "Connexion via le service de médiation du fabricant ; rien à ouvrir sur votre réseau.",
+                "data": {
+                    "mac": "Adresse MAC (12 caractères, sans séparateurs)",
+                    "email": "E-mail du compte Delta Dore",
+                    "password": "Mot de passe du compte Delta Dore",
+                    "pin": "Code PIN de l'alarme (optionnel)"
+                }
+            },
+            "manual": {
+                "title": "Connexion manuelle",
+                "description": "Connexion directe à la passerelle avec son mot de passe saisi manuellement ; aucun appel au compte Delta Dore.",
+                "data": {
+                    "host": "Adresse IP ou nom d'hôte de la passerelle",
+                    "mac": "Adresse MAC (12 caractères, sans séparateurs)",
+                    "tydom_password": "Mot de passe de la passerelle",
+                    "pin": "Code PIN de l'alarme (optionnel)"
+                }
+            },
+            "reauth_confirm": {
+                "title": "Réauthentification requise",
+                "description": "La passerelle a rejeté les identifiants enregistrés. Saisissez le mot de passe actuel pour continuer.",
+                "data": {
+                    "password": "Mot de passe du compte Delta Dore",
+                    "tydom_password": "Mot de passe de la passerelle"
+                }
+            }
+        },
+        "error": {
+            "invalid_host": "Adresse IP ou nom d'hôte invalide.",
+            "invalid_macaddress": "L'adresse MAC doit comporter 12 caractères hexadécimaux sans séparateurs.",
+            "invalid_email": "Adresse e-mail invalide.",
+            "invalid_password": "Le mot de passe est trop court.",
+            "invalid_pin": "Le code PIN de l'alarme ne doit contenir que des chiffres.",
+            "authentication_error": "Échec de l'authentification ; vérifiez les identifiants.",
+            "cannot_connect": "Connexion à la passerelle impossible.",
+            "communication_error": "Erreur de communication avec le service Delta Dore ; réessayez."
+        },
+        "abort": {
+            "already_configured": "Cette passerelle est déjà configurée.",
+            "reauth_successful": "Réauthentification réussie."
+        }
+    },
+    "entity": {
+        "binary_sensor": {
+            "batt_defect": {
+                "name": "Batterie"
+            },
+            "obstacle_defect": {
+                "name": "Obstacle"
+            },
+            "up_defect": {
+                "name": "Défaut montée"
+            },
+            "down_defect": {
+                "name": "Défaut descente"
+            },
+            "thermic_defect": {
+                "name": "Défaut thermique"
+            },
+            "calibration_defect": {
+                "name": "Défaut d'étalonnage"
+            },
+            "intrusion": {
+                "name": "Intrusion"
+            },
+            "favorite_position": {
+                "name": "Position favorite"
+            },
+            "fault_open_issue": {
+                "name": "Défaut d'ouverture"
+            },
+            "fault_unit_tamper": {
+                "name": "Autoprotection appareil"
+            },
+            "fault_syst_tamper": {
+                "name": "Autoprotection système"
+            },
+            "fault_unit_battery": {
+                "name": "Batterie appareil"
+            },
+            "fault_syst_battery": {
+                "name": "Batterie système"
+            },
+            "fault_sector": {
+                "name": "Défaut secteur"
+            },
+            "fault_supervision": {
+                "name": "Défaut supervision"
+            },
+            "fault_technical": {
+                "name": "Défaut technique"
+            },
+            "fault_network": {
+                "name": "Défaut réseau"
+            },
+            "fault_sim": {
+                "name": "Défaut SIM"
+            },
+            "fault_remote_survey": {
+                "name": "Défaut télésurveillance"
+            },
+            "fault_video_link": {
+                "name": "Défaut liaison vidéo"
+            },
+            "alarm_sos": {
+                "name": "SOS"
+            },
+            "alarm_technical": {
+                "name": "Alarme technique"
+            }
+        },
+        "climate": {
+            "general": {
+                "name": "Général"
+            }
+        },
+        "switch": {
+            "absence": {
+                "name": "Mode absence"
+            }
+        },
+        "datetime": {
+            "absence_end": {
+                "name": "Fin du mode absence"
+            }
+        },
+        "sensor": {
+            "outdoor_temperature": {
+                "name": "Température extérieure"
+            },
+            "elec_total": {
+                "name": "Réseau électrique"
+            },
+            "elec_heating": {
+                "name": "Chauffage"
+            },
+            "elec_hotwater": {
+                "name": "Eau chaude"
+            },
+            "elec_outlet": {
+                "name": "Prises"
+            },
+            "elec_other": {
+                "name": "Autres"
+            },
+            "temp_indoor": {
+                "name": "Température intérieure"
+            },
+            "temp_outdoor": {
+                "name": "Température extérieure"
+            },
+            "elec_a": {
+                "name": "Puissance instantanée"
+            },
+            "instant_power": {
+                "name": "Puissance instantanée"
+            },
+            "total_index": {
+                "name": "Index total"
+            },
+            "area_temperature": {
+                "name": "Température"
+            },
+            "area_setpoint": {
+                "name": "Consigne"
+            },
+            "area_thermic_level": {
+                "name": "Niveau de chauffe"
+            },
+            "area_authorization": {
+                "name": "Mode de fonctionnement"
+            },
+            "alarm_zone": {
+                "name": "Zone {zone}",
+                "state": {
+                    "armed": "Armée",
+                    "disarmed": "Désarmée"
+                }
+            },
+            "alarm_zone_other": {
+                "name": "Zone Autre",
+                "state": {
+                    "armed": "Armée",
+                    "disarmed": "Désarmée"
+                }
+            },
+            "alarm_operating_mode": {
+                "name": "Mode de fonctionnement",
+                "state": {
+                    "normal": "Normal",
+                    "maintenance": "Maintenance"
+                }
+            }
+        }
+    }
+}

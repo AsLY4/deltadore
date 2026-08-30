@@ -1,0 +1,166 @@
+# Integration Quality Scale — target: Bronze (Home Assistant core PR, Q82).
+#
+# Status per rule: done / todo / exempt. Every Bronze rule is now done or
+# exempt EXCEPT `brands` (the logo PR to home-assistant/brands), kept OUT
+# of scope by UoR decision (Q83) — so Bronze is intentionally not claimed
+# in the manifest. The transport now lives in the `pytydom` PyPI library
+# (backlog B), which satisfies dependency-transparency, async-dependency
+# and inject-websession. The manifest `quality_scale` key is set once the
+# brands decision is revisited.
+
+rules:
+  # --- Bronze -------------------------------------------------------------
+  action-setup:
+    status: exempt
+    comment: The integration registers no custom service actions.
+  appropriate-polling:
+    status: done
+    comment: >-
+      Push integration (local_push); only the energy indexes, which the
+      gateway does not push, are polled, at a bounded interval.
+  brands:
+    status: todo
+    comment: >-
+      Logo/icon PR to home-assistant/brands. Kept OUT of scope by UoR
+      decision (Q83); Bronze is therefore intentionally not claimed in the
+      manifest. Revisit if/when the logo is contributed.
+  common-modules:
+    status: done
+    comment: >-
+      Base entity in entity.py; the single gateway session, inventory and
+      push handling are centralized in hub.py.
+  config-flow-test-coverage:
+    status: done
+    comment: >-
+      config_flow.py is at 100% line coverage (verified with pytest-cov under
+      the pytest-homeassistant-custom-component harness, whose API mirrors the
+      in-tree one). The physical relocation of the tests into tests/components
+      is tracked under backlog C.
+  config-flow: done
+  dependency-transparency:
+    status: done
+    comment: >-
+      The Tydom transport/protocol lives in the `pytydom` library (in-repo
+      under apps/packages/pytydom), Home-Assistant-independent and declared in
+      manifest requirements (`pytydom==0.1.0`).
+  docs-actions:
+    status: exempt
+    comment: No custom service actions to document.
+  docs-triggers:
+    status: exempt
+    comment: No custom triggers.
+  docs-conditions:
+    status: exempt
+    comment: No custom conditions.
+  docs-high-level-description: done
+  docs-installation-instructions: done
+  docs-removal-instructions: done
+  entity-event-setup:
+    status: done
+    comment: >-
+      Entities subscribe in async_added_to_hass and unsubscribe via
+      async_on_remove.
+  entity-unique-id: done
+  has-entity-name: done
+  runtime-data:
+    status: done
+    comment: The gateway hub is stored on entry.runtime_data.
+  test-before-configure:
+    status: done
+    comment: The config flow opens a gateway session before creating the entry.
+  test-before-setup:
+    status: done
+    comment: >-
+      async_setup_entry raises ConfigEntryNotReady / ConfigEntryAuthFailed
+      when the gateway is unreachable or rejects the credentials.
+  unique-config-entry:
+    status: done
+    comment: One entry per gateway MAC (_abort_if_unique_id_configured).
+
+  # --- Silver -------------------------------------------------------------
+  action-exceptions:
+    status: exempt
+    comment: No custom service actions.
+  config-entry-unloading: done
+  docs-configuration-parameters: done
+  docs-installation-parameters: done
+  entity-unavailable:
+    status: todo
+    comment: Entities do not yet go unavailable when the gateway session drops.
+  integration-owner:
+    status: todo
+    comment: manifest codeowners is empty — needs the maintainer handle (backlog A).
+  log-when-unavailable:
+    status: todo
+    comment: Depends on entity-unavailable.
+  parallel-updates:
+    status: done
+    comment: >-
+      PARALLEL_UPDATES = 0 on every platform; all I/O is serialized over the
+      hub's single websocket session.
+  reauthentication-flow: done
+  test-coverage:
+    status: todo
+    comment: Reach >95% coverage in the in-tree HA test harness (backlog D).
+
+  # --- Gold ---------------------------------------------------------------
+  devices: done
+  diagnostics: done
+  discovery-update-info:
+    status: done
+    comment: A DHCP re-discovery updates the stored host.
+  discovery:
+    status: done
+    comment: DHCP discovery (MAC 001A25*, hostname tydom-*).
+  docs-data-update: done
+  docs-examples:
+    status: todo
+    comment: Add example automations/blueprints to the documentation page.
+  docs-known-limitations: done
+  docs-supported-devices: done
+  docs-supported-functions: done
+  docs-troubleshooting: done
+  docs-use-cases:
+    status: todo
+    comment: Add a use-cases section to the documentation page.
+  dynamic-devices:
+    status: todo
+    comment: >-
+      Thermal-zone entities are created dynamically on /areas/data pushes, but
+      full hot-add of newly paired physical devices is not implemented.
+  entity-category: done
+  entity-device-class: done
+  entity-disabled-by-default:
+    status: done
+    comment: The unmeasured energy-temperature sensors are disabled by default.
+  entity-translations: done
+  exception-translations:
+    status: todo
+    comment: Raised HomeAssistantError messages are not yet translatable.
+  icon-translations:
+    status: todo
+    comment: No icons.json yet.
+  reconfiguration-flow:
+    status: todo
+    comment: >-
+      The options flow covers host/PIN/zone changes, but no formal
+      async_step_reconfigure is implemented.
+  repair-issues:
+    status: todo
+    comment: No repair flows yet (reauth is handled by the reauthentication flow).
+  stale-devices:
+    status: todo
+    comment: Devices removed from the gateway are not yet pruned automatically.
+
+  # --- Platinum -----------------------------------------------------------
+  async-dependency:
+    status: done
+    comment: The `pytydom` transport library is fully async (aiohttp).
+  inject-websession:
+    status: done
+    comment: >-
+      The integration passes Home Assistant's shared client session
+      (async_get_clientsession) into pytydom; the library never creates one.
+  strict-typing:
+    status: todo
+    comment: No py.typed / strict-typing declaration yet.

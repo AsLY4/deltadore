@@ -1,0 +1,242 @@
+{
+    "options": {
+        "step": {
+            "init": {
+                "title": "Delta Dore Tydom options",
+                "description": "Adjust the gateway address (follows DHCP changes), the Alarm PIN, and the Tyxal alarm zones. Away and vacation arm the whole alarm (total); the zone lists apply to the other modes.",
+                "data": {
+                    "host": "Gateway IP address or hostname",
+                    "pin": "Alarm PIN",
+                    "zones_home": "Home mode zones (comma-separated, e.g. 1,2,4)",
+                    "zones_night": "Night mode zones (comma-separated)",
+                    "zones_custom": "Custom mode zones (comma-separated)"
+                }
+            }
+        },
+        "error": {
+            "invalid_host": "Invalid IP address or hostname.",
+            "invalid_pin": "The alarm PIN must contain digits only.",
+            "invalid_zones": "Zones must be numbers separated by commas (e.g. 1,2,4).",
+            "cannot_connect": "Cannot connect to the gateway at this address.",
+            "authentication_error": "Authentication failed at this address.",
+            "communication_error": "Communication error; try again."
+        }
+    },
+    "config": {
+        "step": {
+            "user": {
+                "title": "Delta Dore Tydom",
+                "description": "Choose how Home Assistant reaches your Tydom gateway. Local and cloud modes retrieve the gateway password from your Delta Dore account; manual mode asks for it directly.",
+                "data": {
+                    "config_mode": "Configuration mode"
+                }
+            },
+            "local": {
+                "title": "Local connection",
+                "description": "Direct connection to the gateway on your network; the gateway password is retrieved from your Delta Dore account.",
+                "data": {
+                    "host": "Gateway IP address or hostname",
+                    "mac": "MAC address (12 characters, no separators)",
+                    "email": "Delta Dore account email",
+                    "password": "Delta Dore account password",
+                    "pin": "Alarm PIN (optional)"
+                }
+            },
+            "cloud": {
+                "title": "Cloud connection",
+                "description": "Connection through the vendor's mediation service; nothing to open on your network.",
+                "data": {
+                    "mac": "MAC address (12 characters, no separators)",
+                    "email": "Delta Dore account email",
+                    "password": "Delta Dore account password",
+                    "pin": "Alarm PIN (optional)"
+                }
+            },
+            "manual": {
+                "title": "Manual connection",
+                "description": "Direct connection to the gateway with its password entered manually; no Delta Dore account involved.",
+                "data": {
+                    "host": "Gateway IP address or hostname",
+                    "mac": "MAC address (12 characters, no separators)",
+                    "tydom_password": "Gateway password",
+                    "pin": "Alarm PIN (optional)"
+                }
+            },
+            "reauth_confirm": {
+                "title": "Reauthentication required",
+                "description": "The gateway rejected the stored credentials. Enter the current password to continue.",
+                "data": {
+                    "password": "Delta Dore account password",
+                    "tydom_password": "Gateway password"
+                }
+            }
+        },
+        "error": {
+            "invalid_host": "Invalid IP address or hostname.",
+            "invalid_macaddress": "The MAC address must be 12 hexadecimal characters without separators.",
+            "invalid_email": "Invalid email address.",
+            "invalid_password": "The password is too short.",
+            "invalid_pin": "The alarm PIN must contain digits only.",
+            "authentication_error": "Authentication failed; check the credentials.",
+            "cannot_connect": "Cannot connect to the gateway.",
+            "communication_error": "Communication error with the Delta Dore service; try again."
+        },
+        "abort": {
+            "already_configured": "This gateway is already configured.",
+            "reauth_successful": "Reauthentication successful."
+        }
+    },
+    "entity": {
+        "binary_sensor": {
+            "batt_defect": {
+                "name": "Battery"
+            },
+            "obstacle_defect": {
+                "name": "Obstacle"
+            },
+            "up_defect": {
+                "name": "Up defect"
+            },
+            "down_defect": {
+                "name": "Down defect"
+            },
+            "thermic_defect": {
+                "name": "Thermal defect"
+            },
+            "calibration_defect": {
+                "name": "Calibration defect"
+            },
+            "intrusion": {
+                "name": "Intrusion"
+            },
+            "favorite_position": {
+                "name": "Favorite position"
+            },
+            "fault_open_issue": {
+                "name": "Opening fault"
+            },
+            "fault_unit_tamper": {
+                "name": "Device tamper"
+            },
+            "fault_syst_tamper": {
+                "name": "System tamper"
+            },
+            "fault_unit_battery": {
+                "name": "Device battery"
+            },
+            "fault_syst_battery": {
+                "name": "System battery"
+            },
+            "fault_sector": {
+                "name": "Mains power fault"
+            },
+            "fault_supervision": {
+                "name": "Supervision fault"
+            },
+            "fault_technical": {
+                "name": "Technical fault"
+            },
+            "fault_network": {
+                "name": "Network fault"
+            },
+            "fault_sim": {
+                "name": "SIM fault"
+            },
+            "fault_remote_survey": {
+                "name": "Remote monitoring fault"
+            },
+            "fault_video_link": {
+                "name": "Video link fault"
+            },
+            "alarm_sos": {
+                "name": "SOS"
+            },
+            "alarm_technical": {
+                "name": "Technical alarm"
+            }
+        },
+        "climate": {
+            "general": {
+                "name": "General"
+            }
+        },
+        "switch": {
+            "absence": {
+                "name": "Away mode"
+            }
+        },
+        "datetime": {
+            "absence_end": {
+                "name": "Away mode end"
+            }
+        },
+        "sensor": {
+            "outdoor_temperature": {
+                "name": "Outdoor temperature"
+            },
+            "elec_total": {
+                "name": "Electrical network"
+            },
+            "elec_heating": {
+                "name": "Heating"
+            },
+            "elec_hotwater": {
+                "name": "Hot water"
+            },
+            "elec_outlet": {
+                "name": "Outlets"
+            },
+            "elec_other": {
+                "name": "Others"
+            },
+            "temp_indoor": {
+                "name": "Indoor temperature"
+            },
+            "temp_outdoor": {
+                "name": "Outdoor temperature"
+            },
+            "elec_a": {
+                "name": "Instant power"
+            },
+            "instant_power": {
+                "name": "Instant power"
+            },
+            "total_index": {
+                "name": "Total index"
+            },
+            "area_temperature": {
+                "name": "Temperature"
+            },
+            "area_setpoint": {
+                "name": "Setpoint"
+            },
+            "area_thermic_level": {
+                "name": "Heat level"
+            },
+            "area_authorization": {
+                "name": "Operating mode"
+            },
+            "alarm_zone": {
+                "name": "Zone {zone}",
+                "state": {
+                    "armed": "Armed",
+                    "disarmed": "Disarmed"
+                }
+            },
+            "alarm_zone_other": {
+                "name": "Other zone",
+                "state": {
+                    "armed": "Armed",
+                    "disarmed": "Disarmed"
+                }
+            },
+            "alarm_operating_mode": {
+                "name": "Operating mode",
+                "state": {
+                    "normal": "Normal",
+                    "maintenance": "Maintenance"
+                }
+            }
+        }
+    }
+}
